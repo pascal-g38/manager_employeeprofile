@@ -9,7 +9,7 @@
 		<f:GridList
 			id="gridListId"
 			headerText="{i18n>GridListHeader}"
-			items="{ path : '/EmployeeProfileManager/_EmployeeSkills' }" 
+			items="{ path : '_EmployeeSkills' }" 
       width="auto"       
       >
 			<f:GridListItem id="gridListItemId">
