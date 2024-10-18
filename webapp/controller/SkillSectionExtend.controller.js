@@ -24,7 +24,7 @@ sap.ui.define([
                     const SkillsView = this.getView().byId(this._sectionPrefix + "gridListId");
                     const ItemsBinding = SkillsView.getBinding("items");
                     const id = this.getView().getModel("customView").getProperty("/id")
-                    ItemsBinding.filter(new Filter({ path: 'EmployeeId', operator: FilterOperator.EQ , value1: id }));
+//                    ItemsBinding.filter(new Filter({ path: 'EmployeeId', operator: FilterOperator.EQ , value1: id }));
                 }
             }
            }      
