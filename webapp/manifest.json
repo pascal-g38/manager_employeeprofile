@@ -127,6 +127,11 @@
           "pattern": "EmployeeProfileManager({key})/_ProfileEntry({key2}):?query:",
           "name": "ProfileEntryManagerObjectPage",
           "target": "ProfileEntryManagerObjectPage"
+        },
+        {
+          "name": "EmployeeProfileManager__ReferenceObjectPage",
+          "pattern": "EmployeeProfileManager({key})/_Reference({_ReferenceKey}):?query:",
+          "target": "EmployeeProfileManager__ReferenceObjectPage"
         }
       ],
       "targets": {
@@ -183,6 +188,11 @@
                   "detail": {
                     "route": "ProfileEntryManagerObjectPage"
                   }
+                },
+                "_Reference": {
+                  "detail": {
+                    "route": "EmployeeProfileManager__ReferenceObjectPage"
+                  }
                 }
               }
             }
@@ -211,6 +221,17 @@
               },
               "editableHeaderContent": false,
               "contextPath": "/EmployeeProfileManager/_ProfileEntry"
+            }
+          }
+        },
+        "EmployeeProfileManager__ReferenceObjectPage": {
+          "type": "Component",
+          "id": "EmployeeProfileManager__ReferenceObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "navigation": {},
+              "contextPath": "/EmployeeProfileManager/_Reference"
             }
           }
         }

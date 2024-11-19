@@ -56,6 +56,7 @@
                 <Property Name="EmployeeSkillId" Type="Edm.Guid" Nullable="false"/>
                 <Property Name="SkillId" Type="Edm.Guid"/>
                 <Property Name="EmployeeId" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="EmployeeNumber" Type="Edm.String" Nullable="false" MaxLength="12"/>
                 <Property Name="Rating" Type="Edm.Byte" Nullable="false"/>
                 <Property Name="Skillname" Type="Edm.String" Nullable="false" MaxLength="30"/>
                 <Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
@@ -103,6 +104,38 @@
                     <ReferentialConstraint Property="Profileentryid" ReferencedProperty="ProfileEntryId"/>
                 </NavigationProperty>
             </EntityType>
+            <EntityType Name="ReferenceManagerType">
+                <Key>
+                    <PropertyRef Name="ReferenceId"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ReferenceId" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="EmployeeId" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="TimeframeFrom" Type="Edm.Date"/>
+                <Property Name="TimeframeTo" Type="Edm.Date"/>
+                <Property Name="CustomerContactPerson" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="Assessment" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="CreatedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="LastChangedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="LastChangedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="DraftEntityCreationDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="DraftEntityLastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="__CreateByAssociationControl" Type="com.sap.gateway.srvd.zmvd_ui_employeeprofilemanager.v0001.ReferenceManagerCbAControl"/>
+                <Property Name="__EntityControl" Type="com.sap.gateway.srvd.zmvd_ui_employeeprofilemanager.v0001.EntityControl"/>
+                <Property Name="SAP__Messages" Type="Collection(com.sap.gateway.srvd.zmvd_ui_employeeprofilemanager.v0001.SAP__Message)" Nullable="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="com.sap.gateway.srvd.zmvd_ui_employeeprofilemanager.v0001.I_DraftAdministrativeDataType"/>
+                <NavigationProperty Name="SiblingEntity" Type="com.sap.gateway.srvd.zmvd_ui_employeeprofilemanager.v0001.ReferenceManagerType"/>
+                <NavigationProperty Name="_Attachment" Type="Collection(com.sap.gateway.srvd.zmvd_ui_employeeprofilemanager.v0001.AttachmentManagerType)" Partner="_Reference">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="_Employee" Type="com.sap.gateway.srvd.zmvd_ui_employeeprofilemanager.v0001.EmployeeProfileManagerType" Nullable="false" Partner="_Reference">
+                    <ReferentialConstraint Property="EmployeeId" ReferencedProperty="EmployeeId"/>
+                </NavigationProperty>
+            </EntityType>
             <EntityType Name="ProfileEntryManagerType">
                 <Key>
                     <PropertyRef Name="ProfileEntryId"/>
@@ -115,6 +148,7 @@
                 <Property Name="ValidFrom" Type="Edm.Date"/>
                 <Property Name="ValidTo" Type="Edm.Date"/>
                 <Property Name="Description" Type="Edm.String" Nullable="false"/>
+                <Property Name="ShortDescription" Type="Edm.String" Nullable="false"/>
                 <Property Name="ProfileEntryType" Type="Edm.String" Nullable="false" MaxLength="1"/>
                 <Property Name="EntryTypeText" Type="Edm.String" Nullable="false" MaxLength="60"/>
                 <Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
@@ -136,6 +170,36 @@
                 </NavigationProperty>
                 <NavigationProperty Name="_ProfileEntrySkill" Type="Collection(com.sap.gateway.srvd.zmvd_ui_employeeprofilemanager.v0001.ProfileEntrySkillManagerType)" Partner="_ProfileEntry">
                     <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="AttachmentManagerType">
+                <Key>
+                    <PropertyRef Name="ReferenceAttachmentId"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ReferenceAttachmentId" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="ReferenceId" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="AttachmentName" Type="Edm.String" Nullable="false" MaxLength="128"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="150"/>
+                <Property Name="FileContent" Type="Edm.Stream"/>
+                <Property Name="MimeType" Type="Edm.String" Nullable="false" MaxLength="128"/>
+                <Property Name="EmployeeId" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="CreatedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="LastChangedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="LastChangedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="DraftEntityCreationDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="DraftEntityLastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="__EntityControl" Type="com.sap.gateway.srvd.zmvd_ui_employeeprofilemanager.v0001.EntityControl"/>
+                <Property Name="SAP__Messages" Type="Collection(com.sap.gateway.srvd.zmvd_ui_employeeprofilemanager.v0001.SAP__Message)" Nullable="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="com.sap.gateway.srvd.zmvd_ui_employeeprofilemanager.v0001.I_DraftAdministrativeDataType"/>
+                <NavigationProperty Name="SiblingEntity" Type="com.sap.gateway.srvd.zmvd_ui_employeeprofilemanager.v0001.AttachmentManagerType"/>
+                <NavigationProperty Name="_Employee" Type="com.sap.gateway.srvd.zmvd_ui_employeeprofilemanager.v0001.EmployeeProfileManagerType"/>
+                <NavigationProperty Name="_Reference" Type="com.sap.gateway.srvd.zmvd_ui_employeeprofilemanager.v0001.ReferenceManagerType" Nullable="false" Partner="_Attachment">
+                    <ReferentialConstraint Property="ReferenceId" ReferencedProperty="ReferenceId"/>
                 </NavigationProperty>
             </EntityType>
             <EntityType Name="I_DraftAdministrativeDataType">
@@ -171,6 +235,8 @@
                 <Property Name="Birthday" Type="Edm.Date"/>
                 <Property Name="EntryDate" Type="Edm.Date"/>
                 <Property Name="Qualification" Type="Edm.String" Nullable="false" MaxLength="100"/>
+                <Property Name="CustomerQuotes" Type="Edm.String" Nullable="false"/>
+                <Property Name="AboutEmployee" Type="Edm.String" Nullable="false"/>
                 <Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
                 <Property Name="CreatedAt" Type="Edm.DateTimeOffset" Precision="7"/>
                 <Property Name="LastChangedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
@@ -193,9 +259,15 @@
                 <NavigationProperty Name="_ProfileEntry" Type="Collection(com.sap.gateway.srvd.zmvd_ui_employeeprofilemanager.v0001.ProfileEntryManagerType)" Partner="_Employee">
                     <OnDelete Action="Cascade"/>
                 </NavigationProperty>
+                <NavigationProperty Name="_Reference" Type="Collection(com.sap.gateway.srvd.zmvd_ui_employeeprofilemanager.v0001.ReferenceManagerType)" Partner="_Employee">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
             </EntityType>
             <ComplexType Name="EmployeeProfileManagerControl">
                 <Property Name="EmployeeNumber" Type="Edm.Byte" Nullable="false"/>
+            </ComplexType>
+            <ComplexType Name="ReferenceManagerCbAControl">
+                <Property Name="_Attachment" Type="Edm.Boolean" Nullable="false"/>
             </ComplexType>
             <ComplexType Name="ProfileEntryManagerCbAControl">
                 <Property Name="_ProfileEntrySkill" Type="Edm.Boolean" Nullable="false"/>
@@ -203,6 +275,7 @@
             <ComplexType Name="EmployeeProfileManagerCbAControl">
                 <Property Name="_EmployeeSkills" Type="Edm.Boolean" Nullable="false"/>
                 <Property Name="_ProfileEntry" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="_Reference" Type="Edm.Boolean" Nullable="false"/>
             </ComplexType>
             <ComplexType Name="EmployeeProfileManagerOperationControl">
                 <Property Name="Edit" Type="Edm.Boolean" Nullable="false"/>
@@ -239,11 +312,18 @@
                 <Parameter Name="_it" Type="com.sap.gateway.srvd.zmvd_ui_employeeprofilemanager.v0001.EmployeeProfileManagerType" Nullable="false"/>
             </Action>
             <EntityContainer Name="Container">
+                <EntitySet Name="AttachmentManager" EntityType="com.sap.gateway.srvd.zmvd_ui_employeeprofilemanager.v0001.AttachmentManagerType">
+                    <NavigationPropertyBinding Path="DraftAdministrativeData" Target="I_DraftAdministrativeData"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="AttachmentManager"/>
+                    <NavigationPropertyBinding Path="_Employee" Target="EmployeeProfileManager"/>
+                    <NavigationPropertyBinding Path="_Reference" Target="ReferenceManager"/>
+                </EntitySet>
                 <EntitySet Name="EmployeeProfileManager" EntityType="com.sap.gateway.srvd.zmvd_ui_employeeprofilemanager.v0001.EmployeeProfileManagerType">
                     <NavigationPropertyBinding Path="DraftAdministrativeData" Target="I_DraftAdministrativeData"/>
                     <NavigationPropertyBinding Path="SiblingEntity" Target="EmployeeProfileManager"/>
                     <NavigationPropertyBinding Path="_EmployeeSkills" Target="EmployeeSkillManager"/>
                     <NavigationPropertyBinding Path="_ProfileEntry" Target="ProfileEntryManager"/>
+                    <NavigationPropertyBinding Path="_Reference" Target="ReferenceManager"/>
                 </EntitySet>
                 <EntitySet Name="EmployeeSkillManager" EntityType="com.sap.gateway.srvd.zmvd_ui_employeeprofilemanager.v0001.EmployeeSkillManagerType">
                     <NavigationPropertyBinding Path="DraftAdministrativeData" Target="I_DraftAdministrativeData"/>
@@ -262,6 +342,12 @@
                     <NavigationPropertyBinding Path="SiblingEntity" Target="ProfileEntrySkillManager"/>
                     <NavigationPropertyBinding Path="_Employee" Target="EmployeeProfileManager"/>
                     <NavigationPropertyBinding Path="_ProfileEntry" Target="ProfileEntryManager"/>
+                </EntitySet>
+                <EntitySet Name="ReferenceManager" EntityType="com.sap.gateway.srvd.zmvd_ui_employeeprofilemanager.v0001.ReferenceManagerType">
+                    <NavigationPropertyBinding Path="DraftAdministrativeData" Target="I_DraftAdministrativeData"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="ReferenceManager"/>
+                    <NavigationPropertyBinding Path="_Attachment" Target="AttachmentManager"/>
+                    <NavigationPropertyBinding Path="_Employee" Target="EmployeeProfileManager"/>
                 </EntitySet>
             </EntityContainer>
             <Annotations Target="SAP__self.EmployeeSkillManagerType/EmployeeSkillId">
@@ -287,6 +373,12 @@
                 <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.Label" String="Mitarbeiter UUID"/>
                 <Annotation Term="SAP__common.QuickInfo" String="MVD: Mitarbeiter-UUID"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EmployeeSkillManagerType/EmployeeNumber">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Mitarbeiter"/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Mitarbeiternummer"/>
             </Annotations>
             <Annotations Target="SAP__self.EmployeeSkillManagerType/Skillname">
                 <Annotation Term="SAP__core.Computed"/>
@@ -697,7 +789,8 @@
                 </Annotation>
                 <Annotation Term="SAP__capabilities.SearchRestrictions">
                     <Record>
-                        <PropertyValue Property="Searchable" Bool="false"/>
+                        <PropertyValue Property="Searchable" Bool="true"/>
+                        <PropertyValue Property="UnsupportedExpressions" EnumMember="SAP__capabilities.SearchExpressions/AND SAP__capabilities.SearchExpressions/OR SAP__capabilities.SearchExpressions/NOT SAP__capabilities.SearchExpressions/group SAP__capabilities.SearchExpressions/phrase"/>
                     </Record>
                 </Annotation>
                 <Annotation Term="SAP__capabilities.FilterRestrictions">
@@ -810,7 +903,269 @@
                     <Collection>
                         <PropertyPath>Profileentryskillsid</PropertyPath>
                         <PropertyPath>Profileentryid</PropertyPath>
+                        <PropertyPath>Skillid</PropertyPath>
                     </Collection>
+                </Annotation>
+                <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ReferenceManagerType/ReferenceId">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Referenz-UUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Referenz-UUID"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ReferenceManagerType/EmployeeId">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Mitarbeiter UUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Mitarbeiter-UUID"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ReferenceManagerType/CustomerContactPerson">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Kundenansprechpartn."/>
+                <Annotation Term="SAP__common.Heading" String="Kundenansprechpartner"/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Kundenansprechpartner"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ReferenceManagerType/Assessment">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Wertung"/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Wertung (verschicken / nicht verschicken)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ReferenceManagerType/CreatedBy">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Angelegt von"/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Angelegt von"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ReferenceManagerType/CreatedAt">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Angelegt am"/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Angelegt am"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ReferenceManagerType/LastChangedBy">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Geändert von"/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Zuletzt geändert von"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ReferenceManagerType/LastChangedAt">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Geändert am"/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Zuletzt geändert am"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ReferenceManagerType/HasDraftEntity">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Has Draft"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Has draft document"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ReferenceManagerType/DraftEntityCreationDateTime">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Draft Created On"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ReferenceManagerType/DraftEntityLastChangeDateTime">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Draft Last Changed On"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ReferenceManagerType/HasActiveEntity">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Has active"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Has active document"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ReferenceManagerType/IsActiveEntity">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Is active"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Is active document"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ReferenceManagerType/__CreateByAssociationControl">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ReferenceManagerType/__EntityControl">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ReferenceManagerType/_Attachment">
+                <Annotation Term="SAP__common.Composition"/>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/ReferenceManager">
+                <Annotation Term="SAP__capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Attachment"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Path="__CreateByAssociationControl/_Attachment"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Employee"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.DraftNode">
+                    <Record/>
+                </Annotation>
+                <Annotation Term="SAP__common.DraftActivationVia">
+                    <Collection>
+                        <String>SAP__self.Container/EmployeeProfileManager</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="Filterable" Bool="true"/>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="DraftEntityCreationDateTime"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="DraftEntityLastChangeDateTime"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>__CreateByAssociationControl</PropertyPath>
+                                <PropertyPath>__EntityControl</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>__CreateByAssociationControl</PropertyPath>
+                                <PropertyPath>__EntityControl</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Path="__EntityControl/Deletable"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Path="__EntityControl/Updatable"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.ReferenceManagerType">
+                <Annotation Term="SAP__common.Label" String="MVD: Referenzen der Mitarbeiter"/>
+                <Annotation Term="SAP__UI.Facets">
+                    <Collection>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Profileinträge"/>
+                            <PropertyValue Property="ID" String="References"/>
+                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.Identification"/>
+                        </Record>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Dateianhänge"/>
+                            <PropertyValue Property="ID" String="Attachments"/>
+                            <PropertyValue Property="Target" AnnotationPath="_Attachment/@SAP__UI.PresentationVariant"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="Referenz"/>
+                        <PropertyValue Property="TypeNamePlural" String="Referenzen"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="SAP__UI.DataField">
+                                <PropertyValue Property="Value" Path="ReferenceId"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.Identification">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="ReferenzID"/>
+                            <PropertyValue Property="Value" Path="ReferenceId"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="Zeitraum: Beginn"/>
+                            <PropertyValue Property="Value" Path="TimeframeFrom"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="Zeitraum: Schluss"/>
+                            <PropertyValue Property="Value" Path="TimeframeTo"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="Kundenansprechpartner"/>
+                            <PropertyValue Property="Value" Path="CustomerContactPerson"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.LineItem">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ReferenceId"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="TimeframeFrom"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="TimeframeTo"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CustomerContactPerson"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>ReferenceId</PropertyPath>
+                        <PropertyPath>TimeframeFrom</PropertyPath>
+                        <PropertyPath>TimeframeTo</PropertyPath>
+                        <PropertyPath>CustomerContactPerson</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="Communication.Contact">
+                    <Record/>
                 </Annotation>
                 <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
             </Annotations>
@@ -853,7 +1208,6 @@
             </Annotations>
             <Annotations Target="SAP__self.ProfileEntryManagerType/EntryTypeText">
                 <Annotation Term="SAP__core.Computed"/>
-                <Annotation Term="SAP__UI.Hidden"/>
                 <Annotation Term="SAP__common.Label" String="Beschreibung"/>
                 <Annotation Term="SAP__common.QuickInfo" String="MVD: Beschreibung eines Profileintragtypen"/>
             </Annotations>
@@ -970,6 +1324,10 @@
                                     <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
                                 </Record>
                                 <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ShortDescription"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                                <Record>
                                     <PropertyValue Property="Property" PropertyPath="DraftEntityCreationDateTime"/>
                                     <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
                                 </Record>
@@ -992,6 +1350,7 @@
                         <PropertyValue Property="NonSortableProperties">
                             <Collection>
                                 <PropertyPath>Description</PropertyPath>
+                                <PropertyPath>ShortDescription</PropertyPath>
                                 <PropertyPath>__CreateByAssociationControl</PropertyPath>
                                 <PropertyPath>__EntityControl</PropertyPath>
                             </Collection>
@@ -1032,7 +1391,7 @@
                         <Record Type="SAP__UI.ReferenceFacet">
                             <PropertyValue Property="Label" String="Profileinträge"/>
                             <PropertyValue Property="ID" String="ProfileEntry"/>
-                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.Identification"/>
+                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.Identification#ProfileEntryData"/>
                         </Record>
                         <Record Type="SAP__UI.ReferenceFacet">
                             <PropertyValue Property="Label" String="Skills"/>
@@ -1047,7 +1406,7 @@
                                     <Collection>
                                         <Record>
                                             <PropertyValue Property="code" String="SY-530"/>
-                                            <PropertyValue Property="message" String="An exception was raised"/>
+                                            <PropertyValue Property="message" String="Es ist eine Ausnahme aufgetreten"/>
                                             <PropertyValue Property="severity" String="error"/>
                                         </Record>
                                     </Collection>
@@ -1083,6 +1442,18 @@
                             <PropertyValue Property="Value" Path="CustomerId"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="Beschreibung"/>
+                            <PropertyValue Property="Value" Path="Description"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="Profieleintrag"/>
+                            <PropertyValue Property="Value" Path="EntryTypeText"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.Identification" Qualifier="ProfileEntryData">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Label" String="Aktivität"/>
                             <PropertyValue Property="Value" Path="ActivityName"/>
                         </Record>
@@ -1095,16 +1466,8 @@
                             <PropertyValue Property="Value" Path="ValidTo"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Label" String="Beschreibung"/>
-                            <PropertyValue Property="Value" Path="Description"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Label" String="Aktivitätstyp"/>
                             <PropertyValue Property="Value" Path="ProfileEntryType"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Label" String="Profieleintrag"/>
-                            <PropertyValue Property="Value" Path="EntryTypeText"/>
                         </Record>
                     </Collection>
                 </Annotation>
@@ -1147,6 +1510,298 @@
                         <PropertyPath>Description</PropertyPath>
                         <PropertyPath>ProfileEntryType</PropertyPath>
                     </Collection>
+                </Annotation>
+                <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
+            </Annotations>
+            <Annotations Target="SAP__self.AttachmentManagerType/ReferenceAttachmentId">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Dateianhang"/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Dateianhang-UUID"/>
+            </Annotations>
+            <Annotations Target="SAP__self.AttachmentManagerType/ReferenceId">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Referenz-UUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Referenz-UUID"/>
+            </Annotations>
+            <Annotations Target="SAP__self.AttachmentManagerType/FileContent">
+                <Annotation Term="SAP__core.ContentDisposition">
+                    <Record>
+                        <PropertyValue Property="Filename" Path="AttachmentName"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.MediaType" Path="MimeType"/>
+                <Annotation Term="SAP__common.Label" String="Datei"/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Dateiinhalt"/>
+            </Annotations>
+            <Annotations Target="SAP__self.AttachmentManagerType/MimeType">
+                <Annotation Term="SAP__core.IsMediaType"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Mime-Type"/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Mime-Type der Datei"/>
+            </Annotations>
+            <Annotations Target="SAP__self.AttachmentManagerType/EmployeeId">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Mitarbeiter UUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Mitarbeiter-UUID"/>
+            </Annotations>
+            <Annotations Target="SAP__self.AttachmentManagerType/CreatedBy">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Angelegt von"/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Angelegt von"/>
+            </Annotations>
+            <Annotations Target="SAP__self.AttachmentManagerType/CreatedAt">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Angelegt am"/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Angelegt am"/>
+            </Annotations>
+            <Annotations Target="SAP__self.AttachmentManagerType/LastChangedBy">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Geändert von"/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Zuletzt geändert von"/>
+            </Annotations>
+            <Annotations Target="SAP__self.AttachmentManagerType/LastChangedAt">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Geändert am"/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Zuletzt geändert am"/>
+            </Annotations>
+            <Annotations Target="SAP__self.AttachmentManagerType/HasDraftEntity">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Has Draft"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Has draft document"/>
+            </Annotations>
+            <Annotations Target="SAP__self.AttachmentManagerType/DraftEntityCreationDateTime">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Draft Created On"/>
+            </Annotations>
+            <Annotations Target="SAP__self.AttachmentManagerType/DraftEntityLastChangeDateTime">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Draft Last Changed On"/>
+            </Annotations>
+            <Annotations Target="SAP__self.AttachmentManagerType/HasActiveEntity">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Has active"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Has active document"/>
+            </Annotations>
+            <Annotations Target="SAP__self.AttachmentManagerType/IsActiveEntity">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Is active"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Is active document"/>
+            </Annotations>
+            <Annotations Target="SAP__self.AttachmentManagerType/__EntityControl">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/AttachmentManager">
+                <Annotation Term="SAP__capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Employee"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Reference"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.DraftNode">
+                    <Record/>
+                </Annotation>
+                <Annotation Term="SAP__common.DraftActivationVia">
+                    <Collection>
+                        <String>SAP__self.Container/EmployeeProfileManager</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="Filterable" Bool="true"/>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="DraftEntityCreationDateTime"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="DraftEntityLastChangeDateTime"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>__EntityControl</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>__EntityControl</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Path="__EntityControl/Deletable"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Path="__EntityControl/Updatable"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.AttachmentManagerType">
+                <Annotation Term="SAP__common.Label" String="MVD: Dateianhang in einer Referenz"/>
+                <Annotation Term="SAP__UI.Facets">
+                    <Collection>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.FieldGroup#FLDGRP_DATA"/>
+                        </Record>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.FieldGroup#FLDGRP_ADMIN_DATA"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.FieldGroup" Qualifier="FLDGRP_ADMIN_DATA">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="CreatedBy"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="CreatedAt"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="LastChangedBy"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="LastChangedAt"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.FieldGroup" Qualifier="FLDGRP_DATA">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="FileContent"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Value" Path="Description"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="Dateianhang"/>
+                        <PropertyValue Property="TypeNamePlural" String="Dateianhänge"/>
+                        <PropertyValue Property="TypeImageUrl" String="sap-icon://attachment"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="SAP__UI.DataField">
+                                <PropertyValue Property="Value" Path="AttachmentName"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.LineItem">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="FileContent"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="100px"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Description"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="CreatedAt"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="LastChangedAt"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.PresentationVariant">
+                    <Record>
+                        <PropertyValue Property="SortOrder">
+                            <Collection>
+                                <Record Type="SAP__common.SortOrderType">
+                                    <PropertyValue Property="Property" PropertyPath="AttachmentName"/>
+                                    <PropertyValue Property="Descending" Bool="false"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="RequestAtLeast">
+                            <Collection>
+                                <PropertyPath>AttachmentName</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Visualizations">
+                            <Collection>
+                                <AnnotationPath>@SAP__UI.LineItem</AnnotationPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Communication.Contact">
+                    <Record/>
                 </Annotation>
                 <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
             </Annotations>
@@ -1348,6 +2003,14 @@
                                         </Record>
                                     </PropertyValue>
                                 </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Reference"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Path="__CreateByAssociationControl/_Reference"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
                             </Collection>
                         </PropertyValue>
                     </Record>
@@ -1371,6 +2034,14 @@
                         <PropertyValue Property="FilterExpressionRestrictions">
                             <Collection>
                                 <Record>
+                                    <PropertyValue Property="Property" PropertyPath="CustomerQuotes"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="AboutEmployee"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                                <Record>
                                     <PropertyValue Property="Property" PropertyPath="DraftEntityCreationDateTime"/>
                                     <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
                                 </Record>
@@ -1393,6 +2064,8 @@
                     <Record>
                         <PropertyValue Property="NonSortableProperties">
                             <Collection>
+                                <PropertyPath>CustomerQuotes</PropertyPath>
+                                <PropertyPath>AboutEmployee</PropertyPath>
                                 <PropertyPath>__CreateByAssociationControl</PropertyPath>
                                 <PropertyPath>__FieldControl</PropertyPath>
                                 <PropertyPath>__OperationControl</PropertyPath>
@@ -1427,6 +2100,9 @@
             <Annotations Target="SAP__self.EmployeeProfileManagerType/_ProfileEntry">
                 <Annotation Term="SAP__common.Composition"/>
             </Annotations>
+            <Annotations Target="SAP__self.EmployeeProfileManagerType/_Reference">
+                <Annotation Term="SAP__common.Composition"/>
+            </Annotations>
             <Annotations Target="SAP__self.Edit(SAP__self.EmployeeProfileManagerType)">
                 <Annotation Term="SAP__core.OperationAvailable" Path="_it/__OperationControl/Edit"/>
             </Annotations>
@@ -1440,6 +2116,11 @@
                             <PropertyValue Property="Target" AnnotationPath="@SAP__UI.Identification"/>
                         </Record>
                         <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Über Sie/Ihn"/>
+                            <PropertyValue Property="ID" String="Quotes"/>
+                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.FieldGroup#GroupQuotes"/>
+                        </Record>
+                        <Record Type="SAP__UI.ReferenceFacet">
                             <PropertyValue Property="Label" String="Skills"/>
                             <PropertyValue Property="ID" String="Skills"/>
                             <PropertyValue Property="Target" AnnotationPath="_EmployeeSkills/@SAP__UI.PresentationVariant"/>
@@ -1449,7 +2130,28 @@
                             <PropertyValue Property="ID" String="Entrys"/>
                             <PropertyValue Property="Target" AnnotationPath="_ProfileEntry/@SAP__UI.LineItem"/>
                         </Record>
+                        <Record Type="SAP__UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Referenzen"/>
+                            <PropertyValue Property="ID" String="References"/>
+                            <PropertyValue Property="Target" AnnotationPath="_Reference/@SAP__UI.LineItem"/>
+                        </Record>
                     </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.FieldGroup" Qualifier="GroupQuotes">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Label" String="Aussagen von Kunden"/>
+                                    <PropertyValue Property="Value" Path="CustomerQuotes"/>
+                                </Record>
+                                <Record Type="SAP__UI.DataField">
+                                    <PropertyValue Property="Label" String="Über Sie/Ihn"/>
+                                    <PropertyValue Property="Value" Path="AboutEmployee"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
                 </Annotation>
                 <Annotation Term="SAP__UI.HeaderInfo">
                     <Record>
@@ -1499,6 +2201,14 @@
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Label" String="Qualifikation"/>
                             <PropertyValue Property="Value" Path="Qualification"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="Kundenaussagen"/>
+                            <PropertyValue Property="Value" Path="CustomerQuotes"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="Über die Mitarbeiterin / den Mitarbeiter"/>
+                            <PropertyValue Property="Value" Path="AboutEmployee"/>
                         </Record>
                     </Collection>
                 </Annotation>
@@ -1635,6 +2345,12 @@
                 <Annotation Term="SAP__common.Label" String="Beschreibung"/>
                 <Annotation Term="SAP__common.QuickInfo" String="MVD: Beschreibung eines Profileintrags"/>
             </Annotations>
+            <Annotations Target="SAP__self.AttachmentManagerType/Description">
+                <Annotation Term="SAP__UI.MultiLineText"/>
+                <Annotation Term="SAP__common.Label" String="Beschreibung Anhang"/>
+                <Annotation Term="SAP__common.Heading" String="Beschreibung des Dateianhangs"/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Beschreibung des Dateianhangs"/>
+            </Annotations>
             <Annotations Target="SAP__self.EmployeeSkillManagerType/Rating">
                 <Annotation Term="SAP__common.Label" String="Mitar. Skills Rating"/>
                 <Annotation Term="SAP__common.Heading" String="Mitarbeiterskills Rating"/>
@@ -1660,9 +2376,36 @@
                 <Annotation Term="SAP__common.Heading" String="Dynamic Method Control"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Dynamic Method Property"/>
             </Annotations>
+            <Annotations Target="SAP__self.ReferenceManagerType/TimeframeFrom">
+                <Annotation Term="SAP__common.Label" String="Gültig von"/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Gültig von"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ReferenceManagerType/TimeframeTo">
+                <Annotation Term="SAP__common.Label" String="Gültig bis"/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Gültig bis"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ReferenceManagerType/__CreateByAssociationControl/_Attachment">
+                <Annotation Term="SAP__common.Label" String="Dynamic CbA-Control"/>
+                <Annotation Term="SAP__common.Heading" String="Dynamic Create by Association Control"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Dynamic Create via Association Control Property"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ReferenceManagerType/__EntityControl/Deletable">
+                <Annotation Term="SAP__common.Label" String="Dyn. Method Control"/>
+                <Annotation Term="SAP__common.Heading" String="Dynamic Method Control"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Dynamic Method Property"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ReferenceManagerType/__EntityControl/Updatable">
+                <Annotation Term="SAP__common.Label" String="Dyn. Method Control"/>
+                <Annotation Term="SAP__common.Heading" String="Dynamic Method Control"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Dynamic Method Property"/>
+            </Annotations>
             <Annotations Target="SAP__self.ProfileEntryManagerType/ValidTo">
                 <Annotation Term="SAP__common.Label" String="Gültig bis"/>
                 <Annotation Term="SAP__common.QuickInfo" String="MVD: Gültig bis"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProfileEntryManagerType/ShortDescription">
+                <Annotation Term="SAP__common.Label" String="Kurzbeschreibung"/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Kurzbeschreibung eines Profileintrags"/>
             </Annotations>
             <Annotations Target="SAP__self.ProfileEntryManagerType/__CreateByAssociationControl/_ProfileEntrySkill">
                 <Annotation Term="SAP__common.Label" String="Dynamic CbA-Control"/>
@@ -1675,6 +2418,21 @@
                 <Annotation Term="SAP__common.QuickInfo" String="Dynamic Method Property"/>
             </Annotations>
             <Annotations Target="SAP__self.ProfileEntryManagerType/__EntityControl/Updatable">
+                <Annotation Term="SAP__common.Label" String="Dyn. Method Control"/>
+                <Annotation Term="SAP__common.Heading" String="Dynamic Method Control"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Dynamic Method Property"/>
+            </Annotations>
+            <Annotations Target="SAP__self.AttachmentManagerType/AttachmentName">
+                <Annotation Term="SAP__common.Label" String="Name des Dateianhang"/>
+                <Annotation Term="SAP__common.Heading" String="Name des Dateianhangs"/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Name des Dateianhangs"/>
+            </Annotations>
+            <Annotations Target="SAP__self.AttachmentManagerType/__EntityControl/Deletable">
+                <Annotation Term="SAP__common.Label" String="Dyn. Method Control"/>
+                <Annotation Term="SAP__common.Heading" String="Dynamic Method Control"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Dynamic Method Property"/>
+            </Annotations>
+            <Annotations Target="SAP__self.AttachmentManagerType/__EntityControl/Updatable">
                 <Annotation Term="SAP__common.Label" String="Dyn. Method Control"/>
                 <Annotation Term="SAP__common.Heading" String="Dynamic Method Control"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Dynamic Method Property"/>
@@ -1697,12 +2455,27 @@
                 <Annotation Term="SAP__common.Label" String="(Berufs-)abschluss"/>
                 <Annotation Term="SAP__common.QuickInfo" String="MVD: (Berufs-)abschluss"/>
             </Annotations>
+            <Annotations Target="SAP__self.EmployeeProfileManagerType/CustomerQuotes">
+                <Annotation Term="SAP__common.Label" String="Kundenaussagen"/>
+                <Annotation Term="SAP__common.Heading" String="Aussagen vom Kunden zum Mitarbe."/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Aussagen vom Kunden über den Mitarbeiter"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EmployeeProfileManagerType/AboutEmployee">
+                <Annotation Term="SAP__common.Label" String="Aussagen zum Mitarb."/>
+                <Annotation Term="SAP__common.Heading" String="Aussagen zum Mitarbeiter vom Vo."/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Aussagen zum Mitarbeiter vom Vorstand"/>
+            </Annotations>
             <Annotations Target="SAP__self.EmployeeProfileManagerType/__CreateByAssociationControl/_EmployeeSkills">
                 <Annotation Term="SAP__common.Label" String="Dynamic CbA-Control"/>
                 <Annotation Term="SAP__common.Heading" String="Dynamic Create by Association Control"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Dynamic Create via Association Control Property"/>
             </Annotations>
             <Annotations Target="SAP__self.EmployeeProfileManagerType/__CreateByAssociationControl/_ProfileEntry">
+                <Annotation Term="SAP__common.Label" String="Dynamic CbA-Control"/>
+                <Annotation Term="SAP__common.Heading" String="Dynamic Create by Association Control"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Dynamic Create via Association Control Property"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EmployeeProfileManagerType/__CreateByAssociationControl/_Reference">
                 <Annotation Term="SAP__common.Label" String="Dynamic CbA-Control"/>
                 <Annotation Term="SAP__common.Heading" String="Dynamic Create by Association Control"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Dynamic Create via Association Control Property"/>
@@ -1722,6 +2495,11 @@
                 <Annotation Term="SAP__common.Heading" String="Dynamic Field Control"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Dynamic Field Property"/>
             </Annotations>
+            <Annotations Target="SAP__self.ReferenceManagerCbAControl/_Attachment">
+                <Annotation Term="SAP__common.Label" String="Dynamic CbA-Control"/>
+                <Annotation Term="SAP__common.Heading" String="Dynamic Create by Association Control"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Dynamic Create via Association Control Property"/>
+            </Annotations>
             <Annotations Target="SAP__self.ProfileEntryManagerCbAControl/_ProfileEntrySkill">
                 <Annotation Term="SAP__common.Label" String="Dynamic CbA-Control"/>
                 <Annotation Term="SAP__common.Heading" String="Dynamic Create by Association Control"/>
@@ -1733,6 +2511,11 @@
                 <Annotation Term="SAP__common.QuickInfo" String="Dynamic Create via Association Control Property"/>
             </Annotations>
             <Annotations Target="SAP__self.EmployeeProfileManagerCbAControl/_ProfileEntry">
+                <Annotation Term="SAP__common.Label" String="Dynamic CbA-Control"/>
+                <Annotation Term="SAP__common.Heading" String="Dynamic Create by Association Control"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Dynamic Create via Association Control Property"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EmployeeProfileManagerCbAControl/_Reference">
                 <Annotation Term="SAP__common.Label" String="Dynamic CbA-Control"/>
                 <Annotation Term="SAP__common.Heading" String="Dynamic Create by Association Control"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Dynamic Create via Association Control Property"/>

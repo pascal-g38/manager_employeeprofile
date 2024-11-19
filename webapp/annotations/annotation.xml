@@ -20,6 +20,29 @@
                             <PropertyValue Property="ID" String="Entrys"/>
                             <PropertyValue Property="Target" AnnotationPath="_ProfileEntry/@UI.LineItem"/>
                         </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Reference"/>
+                            <PropertyValue Property="ID" String="Reference"/>
+                            <PropertyValue Property="Target" AnnotationPath="_Reference/@UI.LineItem#Reference"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.ReferenceManagerType">
+                <Annotation Term="UI.LineItem" Qualifier="Reference">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="CustomerContactPerson"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Assessment"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="TimeframeFrom"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="TimeframeTo"/>
+                        </Record>
                     </Collection>
                 </Annotation>
             </Annotations>
