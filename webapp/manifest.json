@@ -174,9 +174,17 @@
                       "title": "{i18n>SkillSection}",
                       "position": {
                         "placement": "After",
-                        "anchor": "Employee"
+                        "anchor": "FeedbackSection"
                       },
                       "type": "XMLFragment"
+                    },
+                    "FeedbackSection": {
+                      "template": "manageremployeeprofile.fragment.FeedbackSection",
+                      "position": {
+                        "placement": "After",
+                        "anchor": "Employee"
+                      },
+                      "title": "{i18n>FeedbackSection}"
                     }
                   }
                 }

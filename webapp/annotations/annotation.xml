@@ -27,6 +27,52 @@
                         </Record>
                     </Collection>
                 </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="Feedback">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="CustomerQuotes"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="AboutEmployee"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Mitarbeiter"/>
+                            <PropertyValue Property="Value" Path="Fullname"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Geburtstag"/>
+                            <PropertyValue Property="Value" Path="Birthday"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Einstellungsdatum"/>
+                            <PropertyValue Property="Value" Path="EntryDate"/>
+                            <Annotation Term="UI.Hidden"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Qualifikation"/>
+                            <PropertyValue Property="Value" Path="Qualification"/>
+                            <Annotation Term="UI.Hidden"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Kundenaussagen"/>
+                            <PropertyValue Property="Value" Path="CustomerQuotes"/>
+                            <Annotation Term="UI.Hidden"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Über die Mitarbeiterin / den Mitarbeiter"/>
+                            <PropertyValue Property="Value" Path="AboutEmployee"/>
+                            <Annotation Term="UI.Hidden"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
             </Annotations>
             <Annotations Target="SAP__self.ReferenceManagerType">
                 <Annotation Term="UI.LineItem" Qualifier="Reference">
@@ -45,6 +91,12 @@
                         </Record>
                     </Collection>
                 </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.EmployeeProfileManagerType/CustomerQuotes">
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EmployeeProfileManagerType/AboutEmployee">
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
             </Annotations>
         </Schema>
     </edmx:DataServices>
