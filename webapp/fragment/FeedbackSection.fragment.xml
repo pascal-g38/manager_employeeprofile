@@ -7,7 +7,7 @@
   >
   <FlexBox id="flexBoxFeedbackId">
   <Text id="customerQuotesTextId"
-        text="{i18n>customerQuotesText}"
+        text="{i18n>customerQuotesText}" 
         wrapping="true"
   >
   </Text>
@@ -15,15 +15,11 @@
                           width="100%"
                           height="600px"
                           value="{CustomerQuotes}"
-                          showGroupFont="false"
+                          showGroupFont="true"
                           showGroupLink="false"
                           showGroupInsert="false" 
-                          showGroupFontStyle="false"
-						  showGroupClipboard="false"
-						  showGroupStructure="false"
-						  showGroupTextAlign="false"
-						  showGroupUndo="false"						  
+                          showGroupFontStyle="false"			  
                           editable="{= ${ui>/editMode} === 'Display' ? false : true }"
-  ></rte:RichTextEditor>     
+  ></rte:RichTextEditor>
 </FlexBox>
-</mvc:View>
+</mvc:View> 
