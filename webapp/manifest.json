@@ -219,8 +219,8 @@
                       "template": "manageremployeeprofile.fragment.RTESection",
                       "title": "{i18n>RTESection}",
                       "position": {
-                        "placement": "Before",
-                        "anchor": "Description"
+                        "placement": "After",
+                        "anchor": "Skills"
                       },
                       "type": "XMLFragment"
                     }

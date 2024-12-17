@@ -21,7 +21,7 @@
                             <PropertyValue Property="Target" AnnotationPath="_ProfileEntry/@UI.LineItem"/>
                         </Record>
                         <Record Type="UI.ReferenceFacet">
-                            <PropertyValue Property="Label" String="Reference"/>
+                            <PropertyValue Property="Label" String="Referenzen"/>
                             <PropertyValue Property="ID" String="Reference"/>
                             <PropertyValue Property="Target" AnnotationPath="_Reference/@UI.LineItem#Reference"/>
                         </Record>

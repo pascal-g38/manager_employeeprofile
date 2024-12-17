@@ -8,12 +8,9 @@
   <FlexBox id="flexBoxId">
       <rte:RichTextEditor id="richTextEditorId"
                           width="100%"
-                          height="600px"
+                          height="100%"
                           value="{Description}"
-                          showGroupFont="true"
-                          showGroupLink="true"
-                          showGroupInsert="true" 
-                          showGroupFontStyle="true"
+                          wrapping="true"
                           editable="{= ${ui>/editMode} === 'Display' ? false : true }"
   ></rte:RichTextEditor>     
 </FlexBox>
