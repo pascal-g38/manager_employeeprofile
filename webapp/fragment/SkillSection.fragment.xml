@@ -15,18 +15,21 @@
 			<f:GridListItem id="gridListItemId">
 				<VBox id="vboxId" 
               class="sapUiResponsiveMargin"
-              width="auto"
+              width="100%"
+              height="auto"
                 >
 					<layoutData>
 						<FlexItemData id="flexItemDataId"
                           growFactor="1"
-                          shrinkFactor="0"                        
+                          shrinkFactor="0"     
+                          baseSize="auto"                   
                         /> 
 					</layoutData>
 
 					    <Title id="titleId"
                                text="{Skillname}"
                                wrapping="true"
+                               width="100%"
                         />      
                             <RatingIndicator id="ratingId"
                                              value="{Rating}"
@@ -34,6 +37,7 @@
                                              visualMode="Half"
 					                                   iconSize="16px"
                                              editable="{= ${ui>/editMode} === 'Display' ? false : true }"
+
                             >
 				                    </RatingIndicator>           
 				</VBox>
