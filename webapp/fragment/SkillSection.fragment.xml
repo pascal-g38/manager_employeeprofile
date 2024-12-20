@@ -10,34 +10,44 @@
 			id="gridListId"
 			headerText="{i18n>GridListHeader}"
 			items="{ path : '_EmployeeSkills' }" 
-      width="auto"       
+      width="100%"       
       >
-			<f:GridListItem id="gridListItemId">
-				<VBox id="vboxId" 
-              class="sapUiResponsiveMargin"
-              width="100%"
+			<f:GridListItem id="gridListItemId" 
+      
+                      >
+				<VBox id="vboxId"
+              class="sapUiResponsiveMargin sapUiLargeBeginEnd"
+              width="auto"
               height="auto"
+              wrap="Wrap"
                 >
 					<layoutData>
 						<FlexItemData id="flexItemDataId"
                           growFactor="1"
                           shrinkFactor="0"     
-                          baseSize="auto"                   
+                          baseSize="auto"
+                                                                  
                         /> 
 					</layoutData>
-
 					    <Title id="titleId"
                                text="{Skillname}"
                                wrapping="true"
-                               width="100%"
+                               wrappingType="Hyphenated"
+                               width="auto"
                         />      
+                        <Text id="textID"
+                              text="{Skillarea}" 
+                              wrapping="true"
+                              wrappingType="Hyphenated"
+                              width="100%"
+                        >      
+                        </Text>
                             <RatingIndicator id="ratingId"
                                              value="{Rating}"
                                              maxValue="10"
                                              visualMode="Half"
 					                                   iconSize="16px"
                                              editable="{= ${ui>/editMode} === 'Display' ? false : true }"
-
                             >
 				                    </RatingIndicator>           
 				</VBox>
