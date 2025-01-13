@@ -78,9 +78,6 @@
                 <Annotation Term="UI.LineItem" Qualifier="Reference">
                     <Collection>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="CustomerContactPerson"/>
-                        </Record>
-                        <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Assessment"/>
                         </Record>
                         <Record Type="UI.DataField">
@@ -88,6 +85,20 @@
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="TimeframeTo"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Informationen"/>
+                            <PropertyValue Property="ID" String="References"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.Identification"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Dateianhänge"/>
+                            <PropertyValue Property="ID" String="Attachments"/>
+                            <PropertyValue Property="Target" AnnotationPath="_Attachment/@UI.PresentationVariant"/>
                         </Record>
                     </Collection>
                 </Annotation>
