@@ -7,7 +7,6 @@
     </edmx:Reference>
     <edmx:DataServices>
         <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local">
-
             <Annotations Target="SAP__self.EmployeeProfileManagerType">
                 <Annotation Term="UI.Facets">
                     <Collection>
@@ -15,6 +14,11 @@
                             <PropertyValue Property="Label" String="Mitarbeiter"/>
                             <PropertyValue Property="ID" String="Employee"/>
                             <PropertyValue Property="Target" AnnotationPath="@UI.Identification"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Feedback"/>
+                            <PropertyValue Property="ID" String="Quotes"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GroupQuotes"/>
                         </Record>
                         <Record Type="UI.ReferenceFacet">
                             <PropertyValue Property="Label" String="Aktivitäten und Aufgaben"/>
@@ -27,6 +31,22 @@
                             <PropertyValue Property="Target" AnnotationPath="_Reference/@UI.LineItem"/>
                         </Record>
                     </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="GroupQuotes">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Aussagen von Kunden"/>
+                                    <PropertyValue Property="Value" Path="CustomerQuotes"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Aussagen des Vorstands"/>
+                                    <PropertyValue Property="Value" Path="AboutEmployee"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
                 </Annotation>
             </Annotations>
         </Schema>
