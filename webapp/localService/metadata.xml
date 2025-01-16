@@ -59,6 +59,7 @@
                 <Property Name="EmployeeNumber" Type="Edm.String" Nullable="false" MaxLength="12"/>
                 <Property Name="Rating" Type="Edm.Byte" Nullable="false"/>
                 <Property Name="Skillname" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="Skillarea" Type="Edm.String" Nullable="false" MaxLength="30"/>
                 <Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
                 <Property Name="CreatedAt" Type="Edm.DateTimeOffset" Precision="7"/>
                 <Property Name="LastChangedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
@@ -113,7 +114,8 @@
                 <Property Name="EmployeeId" Type="Edm.Guid" Nullable="false"/>
                 <Property Name="TimeframeFrom" Type="Edm.Date"/>
                 <Property Name="TimeframeTo" Type="Edm.Date"/>
-                <Property Name="CustomerContactPerson" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="CustomerContactPerson" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="CustomerContactName" Type="Edm.String" Nullable="false" MaxLength="100"/>
                 <Property Name="Assessment" Type="Edm.String" Nullable="false" MaxLength="1"/>
                 <Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
                 <Property Name="CreatedAt" Type="Edm.DateTimeOffset" Precision="7"/>
@@ -385,6 +387,11 @@
                 <Annotation Term="SAP__UI.Hidden"/>
                 <Annotation Term="SAP__common.Label" String="Skillname"/>
                 <Annotation Term="SAP__common.QuickInfo" String="MVD: Name eines Skills"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EmployeeSkillManagerType/Skillarea">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Skillkategorie"/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Skillkategorie"/>
             </Annotations>
             <Annotations Target="SAP__self.EmployeeSkillManagerType/CreatedBy">
                 <Annotation Term="SAP__core.Computed"/>
@@ -921,9 +928,9 @@
             </Annotations>
             <Annotations Target="SAP__self.ReferenceManagerType/CustomerContactPerson">
                 <Annotation Term="SAP__common.IsUpperCase"/>
-                <Annotation Term="SAP__common.Label" String="Kundenansprechpartn."/>
-                <Annotation Term="SAP__common.Heading" String="Kundenansprechpartner"/>
-                <Annotation Term="SAP__common.QuickInfo" String="MVD: Kundenansprechpartner"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Business Partner"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Business Partner Number"/>
             </Annotations>
             <Annotations Target="SAP__self.ReferenceManagerType/Assessment">
                 <Annotation Term="SAP__common.IsUpperCase"/>
@@ -1098,7 +1105,7 @@
                 <Annotation Term="SAP__UI.Facets">
                     <Collection>
                         <Record Type="SAP__UI.ReferenceFacet">
-                            <PropertyValue Property="Label" String="Profileinträge"/>
+                            <PropertyValue Property="Label" String="Informationen"/>
                             <PropertyValue Property="ID" String="References"/>
                             <PropertyValue Property="Target" AnnotationPath="@SAP__UI.Identification"/>
                         </Record>
@@ -1123,8 +1130,8 @@
                 <Annotation Term="SAP__UI.Identification">
                     <Collection>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Label" String="ReferenzID"/>
-                            <PropertyValue Property="Value" Path="ReferenceId"/>
+                            <PropertyValue Property="Label" String="Name des Kundenansprechpartner"/>
+                            <PropertyValue Property="Value" Path="CustomerContactName"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Label" String="Zeitraum: Beginn"/>
@@ -1138,12 +1145,17 @@
                             <PropertyValue Property="Label" String="Kundenansprechpartner"/>
                             <PropertyValue Property="Value" Path="CustomerContactPerson"/>
                         </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="ReferenzID"/>
+                            <PropertyValue Property="Value" Path="ReferenceId"/>
+                        </Record>
                     </Collection>
                 </Annotation>
                 <Annotation Term="SAP__UI.LineItem">
                     <Collection>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Value" Path="ReferenceId"/>
+                            <PropertyValue Property="Label" String="Name des Kundenansprechpartners"/>
+                            <PropertyValue Property="Value" Path="CustomerContactName"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="TimeframeFrom"/>
@@ -1154,14 +1166,18 @@
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Value" Path="CustomerContactPerson"/>
                         </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ReferenceId"/>
+                        </Record>
                     </Collection>
                 </Annotation>
                 <Annotation Term="SAP__UI.SelectionFields">
                     <Collection>
-                        <PropertyPath>ReferenceId</PropertyPath>
+                        <PropertyPath>CustomerContactName</PropertyPath>
                         <PropertyPath>TimeframeFrom</PropertyPath>
                         <PropertyPath>TimeframeTo</PropertyPath>
                         <PropertyPath>CustomerContactPerson</PropertyPath>
+                        <PropertyPath>ReferenceId</PropertyPath>
                     </Collection>
                 </Annotation>
                 <Annotation Term="Communication.Contact">
@@ -1703,11 +1719,21 @@
                 <Annotation Term="SAP__common.Label" String="MVD: Dateianhang in einer Referenz"/>
                 <Annotation Term="SAP__UI.Facets">
                     <Collection>
-                        <Record Type="SAP__UI.ReferenceFacet">
-                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.FieldGroup#FLDGRP_DATA"/>
-                        </Record>
-                        <Record Type="SAP__UI.ReferenceFacet">
-                            <PropertyValue Property="Target" AnnotationPath="@SAP__UI.FieldGroup#FLDGRP_ADMIN_DATA"/>
+                        <Record Type="SAP__UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="Referenz-Dateianhang"/>
+                            <PropertyValue Property="ID" String="COLL_GEN_INFO"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="SAP__UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Test"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@SAP__UI.FieldGroup#FLDGRP_DATA"/>
+                                    </Record>
+                                    <Record Type="SAP__UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Test2"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@SAP__UI.FieldGroup#FLDGRP_ADMIN_DATA"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
                         </Record>
                     </Collection>
                 </Annotation>
@@ -2335,6 +2361,18 @@
                 <Annotation Term="SAP__UI.Hidden"/>
                 <Annotation Term="SAP__common.Label" String="Draft In Process By (Description)"/>
             </Annotations>
+            <Annotations Target="SAP__self.EmployeeProfileManagerType/CustomerQuotes">
+                <Annotation Term="SAP__UI.MultiLineText"/>
+                <Annotation Term="SAP__common.Label" String="Kundenaussagen"/>
+                <Annotation Term="SAP__common.Heading" String="Aussagen vom Kunden zum Mitarbe."/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Aussagen vom Kunden über den Mitarbeiter"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EmployeeProfileManagerType/AboutEmployee">
+                <Annotation Term="SAP__UI.MultiLineText"/>
+                <Annotation Term="SAP__common.Label" String="Aussagen zum Mitarb."/>
+                <Annotation Term="SAP__common.Heading" String="Aussagen zum Mitarbeiter vom Vo."/>
+                <Annotation Term="SAP__common.QuickInfo" String="MVD: Aussagen zum Mitarbeiter vom Vorstand"/>
+            </Annotations>
             <Annotations Target="SAP__self.ProfileEntryManagerType/CustomerId">
                 <Annotation Term="SAP__UI.Hidden"/>
                 <Annotation Term="SAP__common.Label" String="Customer-UUID"/>
@@ -2454,16 +2492,6 @@
             <Annotations Target="SAP__self.EmployeeProfileManagerType/Qualification">
                 <Annotation Term="SAP__common.Label" String="(Berufs-)abschluss"/>
                 <Annotation Term="SAP__common.QuickInfo" String="MVD: (Berufs-)abschluss"/>
-            </Annotations>
-            <Annotations Target="SAP__self.EmployeeProfileManagerType/CustomerQuotes">
-                <Annotation Term="SAP__common.Label" String="Kundenaussagen"/>
-                <Annotation Term="SAP__common.Heading" String="Aussagen vom Kunden zum Mitarbe."/>
-                <Annotation Term="SAP__common.QuickInfo" String="MVD: Aussagen vom Kunden über den Mitarbeiter"/>
-            </Annotations>
-            <Annotations Target="SAP__self.EmployeeProfileManagerType/AboutEmployee">
-                <Annotation Term="SAP__common.Label" String="Aussagen zum Mitarb."/>
-                <Annotation Term="SAP__common.Heading" String="Aussagen zum Mitarbeiter vom Vo."/>
-                <Annotation Term="SAP__common.QuickInfo" String="MVD: Aussagen zum Mitarbeiter vom Vorstand"/>
             </Annotations>
             <Annotations Target="SAP__self.EmployeeProfileManagerType/__CreateByAssociationControl/_EmployeeSkills">
                 <Annotation Term="SAP__common.Label" String="Dynamic CbA-Control"/>

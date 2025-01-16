@@ -7,8 +7,8 @@ return ControllerExtension.extend("manageremployeeprofile.controller.FeedbackSec
     _sectionPrefix: "fe::CustomSubSection::FeedbackSection--",
     override: {   
         onInit() { 
-             this.getView().byId(this._sectionPrefix + "richTextEditorCustomerFeedbackId").attachReady(function(){
-                this.getView().byId(this._sectionPrefix + "richTextEditorCustomerFeedbackId")
+             this.getView().byId(this._sectionPrefix + "multilineTextCustomerFeedbackId").attachReady(function(){
+                this.getView().byId(this._sectionPrefix + "multilineTextCustomerFeedbackId")
             }.bind(this))            
           }
         }      

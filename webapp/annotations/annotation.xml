@@ -7,6 +7,7 @@
     </edmx:Reference>
     <edmx:DataServices>
         <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local">
+
             <Annotations Target="SAP__self.EmployeeProfileManagerType">
                 <Annotation Term="UI.Facets">
                     <Collection>
@@ -22,140 +23,8 @@
                         </Record>
                         <Record Type="UI.ReferenceFacet">
                             <PropertyValue Property="Label" String="Referenzen"/>
-                            <PropertyValue Property="ID" String="Reference"/>
-                            <PropertyValue Property="Target" AnnotationPath="_Reference/@UI.LineItem#Reference"/>
-                        </Record>
-                    </Collection>
-                </Annotation>
-                <Annotation Term="UI.FieldGroup" Qualifier="Feedback">
-                    <Record Type="UI.FieldGroupType">
-                        <PropertyValue Property="Data">
-                            <Collection>
-                                <Record Type="UI.DataField">
-                                    <PropertyValue Property="Value" Path="CustomerQuotes"/>
-                                </Record>
-                                <Record Type="UI.DataField">
-                                    <PropertyValue Property="Value" Path="AboutEmployee"/>
-                                </Record>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
-                <Annotation Term="UI.LineItem">
-                    <Collection>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Mitarbeiter"/>
-                            <PropertyValue Property="Value" Path="Fullname"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Geburtstag"/>
-                            <PropertyValue Property="Value" Path="Birthday"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Einstellungsdatum"/>
-                            <PropertyValue Property="Value" Path="EntryDate"/>
-                            <Annotation Term="UI.Hidden"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Qualifikation"/>
-                            <PropertyValue Property="Value" Path="Qualification"/>
-                            <Annotation Term="UI.Hidden"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Kundenaussagen"/>
-                            <PropertyValue Property="Value" Path="CustomerQuotes"/>
-                            <Annotation Term="UI.Hidden"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Über die Mitarbeiterin / den Mitarbeiter"/>
-                            <PropertyValue Property="Value" Path="AboutEmployee"/>
-                            <Annotation Term="UI.Hidden"/>
-                        </Record>
-                    </Collection>
-                </Annotation>
-            </Annotations>
-            <Annotations Target="SAP__self.ReferenceManagerType">
-                <Annotation Term="UI.LineItem" Qualifier="Reference">
-                    <Collection>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="Assessment"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="TimeframeFrom"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="TimeframeTo"/>
-                        </Record>
-                    </Collection>
-                </Annotation>
-                <Annotation Term="UI.Facets">
-                    <Collection>
-                        <Record Type="UI.ReferenceFacet">
-                            <PropertyValue Property="Label" String="Informationen"/>
                             <PropertyValue Property="ID" String="References"/>
-                            <PropertyValue Property="Target" AnnotationPath="@UI.Identification"/>
-                        </Record>
-                        <Record Type="UI.ReferenceFacet">
-                            <PropertyValue Property="Label" String="Dateianhänge"/>
-                            <PropertyValue Property="ID" String="Attachments"/>
-                            <PropertyValue Property="Target" AnnotationPath="_Attachment/@UI.PresentationVariant"/>
-                        </Record>
-                    </Collection>
-                </Annotation>
-            </Annotations>
-            <Annotations Target="SAP__self.EmployeeProfileManagerType/CustomerQuotes">
-                <Annotation Term="UI.MultiLineText" Bool="true"/>
-            </Annotations>
-            <Annotations Target="SAP__self.EmployeeProfileManagerType/AboutEmployee">
-                <Annotation Term="UI.MultiLineText" Bool="true"/>
-            </Annotations>
-            <Annotations Target="SAP__self.ProfileEntryManagerType">
-                <Annotation Term="UI.Identification" Qualifier="ProfileEntryData">
-                    <Collection>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Aktivität"/>
-                            <PropertyValue Property="Value" Path="ActivityName"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Beginn"/>
-                            <PropertyValue Property="Value" Path="ValidFrom"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="Ende"/>
-                            <PropertyValue Property="Value" Path="ValidTo"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="EntryTypeText"/>
-                            <PropertyValue Property="Label" String="Aktivitätstyp"/>
-                        </Record>
-                    </Collection>
-                </Annotation>
-                <Annotation Term="UI.LineItem">
-                    <Collection>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="ProfileEntryId"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="EmployeeId"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="CustomerId"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="ActivityName"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="ValidFrom"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="ValidTo"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="Description"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="EntryTypeText"/>
-                            <PropertyValue Property="Label" String="Profileintragstyp"/>
+                            <PropertyValue Property="Target" AnnotationPath="_Reference/@UI.LineItem"/>
                         </Record>
                     </Collection>
                 </Annotation>
