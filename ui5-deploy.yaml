@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "3.1"
+metadata:
+  name: manageremployeeprofile
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          url: https://s4dev.mibs-ag.de:44301
+        app:
+          name: ZMVD_UI5_EMPPRO
+          description: "MVD: Mitarbeiterprofile"
+          package: ZMVD_EMP
+          transport: S4DK901784
+        exclude:
+          - /test/
