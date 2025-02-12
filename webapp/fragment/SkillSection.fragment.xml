@@ -2,55 +2,44 @@
   xmlns="sap.m"
   xmlns:f="sap.f"
   xmlns:core="sap.ui.core"
-  height="100%"
   xmlns:mvc="sap.ui.core.mvc"
+  xmlns:layout="sap.ui.layout.cssgrid"
   >
 
 		<f:GridList
 			id="gridListId"
 			headerText="{i18n>GridListHeader}"
-			items="{ path : '_EmployeeSkills' }" 
-      width="100%"       
+			items="{ path : '_EmployeeSkills' }"      
+      width="auto" 
       >
-			<f:GridListItem id="gridListItemId" 
-      
-                      >
-				<VBox id="vboxId"
-              class="sapUiResponsiveMargin sapUiLargeBeginEnd"
-              width="auto"
-              height="auto"
-              wrap="Wrap"
-                >
+      <f:customLayout>
+      <layout:GridBoxLayout id="layoutId"
+                            boxesPerRowConfig="XL6 L4 M3 S1" 
+                            >  
+      </layout:GridBoxLayout>    
+      </f:customLayout>                 
+			<f:GridListItem id="gridListItemId" >           
+				<VBox id="vboxId" 
+              class="sapUiResponsiveMargin"  >
 					<layoutData>
-						<FlexItemData id="flexItemDataId"
-                          growFactor="1"
-                          shrinkFactor="0"     
-                          baseSize="auto"
-                                                                  
-                        /> 
+						<FlexItemData id="flexItemDataId"/> 
 					</layoutData>
 					    <Title id="titleId"
-                               text="{Skillname}"
-                               wrapping="true"
-                               wrappingType="Hyphenated"
-                               width="auto"
+                     text="{Skillname}"
                         />      
                         <Text id="textID"
                               text="{Skillarea}" 
-                              wrapping="true"
-                              wrappingType="Hyphenated"
-                              width="100%"
                         >      
                         </Text>
                             <RatingIndicator id="ratingId"
                                              value="{Rating}"
                                              maxValue="10"
                                              visualMode="Half"
-					                                   iconSize="16px"
                                              editable="{= ${ui>/editMode} === 'Display' ? false : true }"
                             >
-				                    </RatingIndicator>           
+				                    </RatingIndicator> 
+                                        
 				</VBox>
 			</f:GridListItem>
 		</f:GridList>
-</mvc:View>
+</mvc:View>	
